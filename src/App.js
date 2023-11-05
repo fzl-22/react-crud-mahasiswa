@@ -39,39 +39,36 @@ const App = () => {
 
   // handler untuk mengedit data mahasiswa
   // akan di-trigger dari komponen RowMahasiswa
-  const handleEditMahasiswa = (data) => {
-    // cari index dari mahasiswa yang akan diedit berdasarkan nomor nim
-    const result = mahasiswas.findIndex(
-      (mahasiswa) => mahasiswa.nim === data.nim
-    );
+  const handleEditMahasiswa = async (data) => {
+    try {
+      const response = await axios.patch('http://localhost:3001/api/mahasiswa/update/' + data.nim, data);
 
-    // copy mahasiswas karena fungsi splice akan mengubah array asal (mutate)
-    const newMahasiswas = mahasiswas;
-    newMahasiswas.splice(result, 1, data);
-    setMahasiswas([...newMahasiswas]);
+      if(!response.data.status){
+        return;
+      }
 
-    // !! jika hanya menggunakan setMahasiswas(newMahasiswas),
-    // react tidak akan me-re-render halaman karena
-    // newMahasiswas = mahasiswa masih merujuk ke object yang sama.
+      getList();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // handler untuk menghapus data mahasiswa di komponen RowMahasiswa
-  const handleHapusMahasiswa = (e) => {
-    // cari index dari mahasiswa yang akan dihapus berdasarkan nomor nim
-    const result = mahasiswas.findIndex(
-      (mahasiswa) => mahasiswa.nim === e.target.id
-    );
+  const handleHapusMahasiswa = async (e) => {
+    console.log(e.target.id);
+    try {
+      
+      const response = await axios.delete('http://localhost:3001/api/mahasiswa/delete/' + e.target.id);
+      
 
-    // copy mahasiswas karena fungsi splice akan mengubah array asal (mutate)
-    const newMahasiswas = mahasiswas;
-    newMahasiswas.splice(result, 1);
-    setMahasiswas([...newMahasiswas]);
+      if(!response.data.status){
+        return;
+      }
 
-    // Cara alternatif penghapusan dengan method filter
-    // const newMahasiswas = mahasiswas.filter(
-    //  mahasiswa => mahasiswa.nim !== e.target.id
-    // );
-    // setMahasiswas(newMahasiswas);
+      getList();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
