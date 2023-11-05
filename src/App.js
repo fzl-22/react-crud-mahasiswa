@@ -3,34 +3,6 @@ import RowMahasiswa from "./components/RowMahasiswa";
 import RowTambahMahasiswa from "./components/RowTambahMahasiswa";
 import axios from "axios";
 
-// Data awal tabel mahasiswa
-// const arrMahasiswas = [
-//   {
-//     nim: "18010245",
-//     nama: "Eka Putra",
-//     jurusan: "Teknik Informatika",
-//     asal_provinsi: "DKI Jakarta",
-//   },
-//   {
-//     nim: "19010214",
-//     nama: "Lisa Permata",
-//     jurusan: "Sistem Informasi",
-//     asal_provinsi: "Sumatera Barat",
-//   },
-//   {
-//     nim: "20010710",
-//     nama: "Rudi Setiawan",
-//     jurusan: "Ilmu Komputer",
-//     asal_provinsi: "Jawa Tengah",
-//   },
-//   {
-//     nim: "20010790",
-//     nama: "Friska Ramadhani",
-//     jurusan: "Ilmu Komputer",
-//     asal_provinsi: "Kalimantan Barat",
-//   },
-// ];
-
 const App = () => {
   const [mahasiswas, setMahasiswas] = useState([]);
 
