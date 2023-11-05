@@ -1,43 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RowMahasiswa from "./components/RowMahasiswa";
 import RowTambahMahasiswa from "./components/RowTambahMahasiswa";
+import axios from "axios";
 
 // Data awal tabel mahasiswa
-const arrMahasiswas = [
-  {
-    nim: "18010245",
-    nama: "Eka Putra",
-    jurusan: "Teknik Informatika",
-    asalProvinsi: "DKI Jakarta",
-  },
-  {
-    nim: "19010214",
-    nama: "Lisa Permata",
-    jurusan: "Sistem Informasi",
-    asalProvinsi: "Sumatera Barat",
-  },
-  {
-    nim: "20010710",
-    nama: "Rudi Setiawan",
-    jurusan: "Ilmu Komputer",
-    asalProvinsi: "Jawa Tengah",
-  },
-  {
-    nim: "20010790",
-    nama: "Friska Ramadhani",
-    jurusan: "Ilmu Komputer",
-    asalProvinsi: "Kalimantan Barat",
-  },
-];
+// const arrMahasiswas = [
+//   {
+//     nim: "18010245",
+//     nama: "Eka Putra",
+//     jurusan: "Teknik Informatika",
+//     asal_provinsi: "DKI Jakarta",
+//   },
+//   {
+//     nim: "19010214",
+//     nama: "Lisa Permata",
+//     jurusan: "Sistem Informasi",
+//     asal_provinsi: "Sumatera Barat",
+//   },
+//   {
+//     nim: "20010710",
+//     nama: "Rudi Setiawan",
+//     jurusan: "Ilmu Komputer",
+//     asal_provinsi: "Jawa Tengah",
+//   },
+//   {
+//     nim: "20010790",
+//     nama: "Friska Ramadhani",
+//     jurusan: "Ilmu Komputer",
+//     asal_provinsi: "Kalimantan Barat",
+//   },
+// ];
 
 const App = () => {
-  const [mahasiswas, setMahasiswas] = useState(arrMahasiswas);
+  const [mahasiswas, setMahasiswas] = useState([]);
+
+  // handler untuk menghandle data mahasiswa
+  const getList = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/mahasiswa");
+      setMahasiswas(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Diakses pertama kali ketika komponen di-render
+  useEffect(() => {
+    getList();
+  }, []);
 
   // handler untuk menambah data mahasiswa,
   // akan di-trigger dari komponen RowTambahMahasiswa
-  const handleTambahMahasiswa = (data) => {
-    const newMahasiswas = [...mahasiswas, data];
-    setMahasiswas(newMahasiswas);
+  const handleTambahMahasiswa = async (data) => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/mahasiswa/store', data);
+
+      if(!response.data.status){
+        return;
+      }
+
+      getList();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // handler untuk mengedit data mahasiswa
