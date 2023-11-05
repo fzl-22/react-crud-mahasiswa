@@ -6,7 +6,7 @@ const RowTambahMahasiswa = (props) => {
     nim: "",
     nama: "",
     jurusan: "",
-    asalProvinsi: "",
+    asal_provinsi: "",
   });
 
   // state untuk menampung pesan ereror
@@ -14,7 +14,7 @@ const RowTambahMahasiswa = (props) => {
     nim: "",
     nama: "",
     jurusan: "",
-    asalProvinsi: "",
+    asal_provinsi: "",
   });
 
   // function untuk membuat 2 ways binding antara form dengan state
@@ -36,8 +36,8 @@ const RowTambahMahasiswa = (props) => {
     // validasi nim
     if (formInput.nim.trim() === "") {
       pesanErrors.nim = "Nim tidak boleh kosong";
-    } else if (!/^[0-9]{8}$/.test(formInput.nim)) {
-      pesanErrors.nim = "Nim harus 8 karakter angka";
+    } else if (!/^[0-9]{10}$/.test(formInput.nim)) {
+      pesanErrors.nim = "Nim harus 10 karakter angka";
     } else if (cekDuplikasiNim()) {
       pesanErrors.nim = "Nim sudah dipakai";
     } else {
@@ -58,11 +58,11 @@ const RowTambahMahasiswa = (props) => {
       pesanErrors.jurusan = "";
     }
 
-    // validasi asalProvinsi
-    if (formInput.asalProvinsi.trim() === "") {
-      pesanErrors.asalProvinsi = "Asal Provinsi tidak boleh kosong";
+    // validasi asal_provinsi
+    if (formInput.asal_provinsi.trim() === "") {
+      pesanErrors.asal_provinsi = "Asal Provinsi tidak boleh kosong";
     } else {
-      pesanErrors.asalProvinsi = "";
+      pesanErrors.asal_provinsi = "";
     }
 
     // update error state
@@ -85,7 +85,7 @@ const RowTambahMahasiswa = (props) => {
         nim: "",
         nama: "",
         jurusan: "",
-        asalProvinsi: "",
+        asal_provinsi: "",
       });
     }
   };
@@ -132,12 +132,12 @@ const RowTambahMahasiswa = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="asalProvinsi"
+                name="asal_provinsi"
                 placeholder="DKI Jakarta"
                 onChange={handleInputChange}
-                value={formInput.asalProvinsi}
+                value={formInput.asal_provinsi}
               />
-              {errors.asalProvinsi && <small>{errors.asalProvinsi}</small>}
+              {errors.asal_provinsi && <small>{errors.asal_provinsi}</small>}
             </div>
             <div className="col">
               <button type="submit" className="btn btn-primary">

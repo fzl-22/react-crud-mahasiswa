@@ -6,14 +6,14 @@ const RowMahasiswa = (props) => {
     nim: props.mahasiswa.nim,
     nama: props.mahasiswa.nama,
     jurusan: props.mahasiswa.jurusan,
-    asalProvinsi: props.mahasiswa.asalProvinsi,
+    asal_provinsi: props.mahasiswa.asal_provinsi,
   });
 
   // state untuk menampung pesan error
   const [errors, setErrors] = useState({
     nama: "",
     jurusan: "",
-    asalProvinsi: "",
+    asal_provinsi: "",
   });
 
   // state untuk penanda "Edit mode"
@@ -70,11 +70,11 @@ const RowMahasiswa = (props) => {
       pesanErrors.jurusan = "";
     }
 
-    // validasi asalProvinsi
-    if (formInput.asalProvinsi.trim() === "") {
-      pesanErrors.asalProvinsi = "Asal provinsi tidak boleh kosong";
+    // validasi asal_provinsi
+    if (formInput.asal_provinsi.trim() === "") {
+      pesanErrors.asal_provinsi = "Asal provinsi tidak boleh kosong";
     } else {
-      pesanErrors.asalProvinsi = "";
+      pesanErrors.asal_provinsi = "";
     }
 
     // update error state
@@ -142,11 +142,11 @@ const RowMahasiswa = (props) => {
                   <input
                     type="text"
                     className="form-control"
-                    name="asalProvinsi"
+                    name="asal_provinsi"
                     onChange={handleInputChange}
-                    value={formInput.asalProvinsi}
+                    value={formInput.asal_provinsi}
                   />{" "}
-                  {errors.asalProvinsi && <small>{errors.asalProvinsi}</small>}{" "}
+                  {errors.asal_provinsi && <small>{errors.asal_provinsi}</small>}{" "}
                 </div>{" "}
                 <div className="col">
                   {" "}
@@ -167,7 +167,7 @@ const RowMahasiswa = (props) => {
         <tr>
           {" "}
           <td>{formInput.nim}</td> <td>{formInput.nama}</td>{" "}
-          <td>{formInput.jurusan}</td> <td>{formInput.asalProvinsi}</td>{" "}
+          <td>{formInput.jurusan}</td> <td>{formInput.asal_provinsi}</td>{" "}
           <td>
             {" "}
             <button
